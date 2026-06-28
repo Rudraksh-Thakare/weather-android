@@ -43,7 +43,7 @@ class WeatherModel {
       tempMax: (json['main']['temp_max'] as num).toDouble(),
       humidity: json['main']['humidity'] as int,
       windSpeed: (json['wind']['speed'] as num).toDouble(),
-      visibility: json['visibility'] as int? ?? 0,
+      visibility: (json['visibility'] as num?)?.toInt() ?? -1,
       condition: json['weather'][0]['main'] ?? 'Clear',
       description: json['weather'][0]['description'] ?? '',
       iconCode: json['weather'][0]['icon'] ?? '01d',
@@ -64,4 +64,16 @@ class WeatherModel {
   String get iconUrl => 'https://openweathermap.org/img/wn/$iconCode@2x.png';
 
   bool get isNight => iconCode.endsWith('n');
+
+  /// Returns true if visibility data was provided by the API
+  bool get hasVisibility => visibility >= 0;
+
+  /// Visibility in km, formatted as string
+  String get visibilityText {
+    if (!hasVisibility) return 'N/A';
+    if (visibility >= 1000) {
+      return '${(visibility / 1000).toStringAsFixed(1)} km';
+    }
+    return '$visibility m';
+  }
 }

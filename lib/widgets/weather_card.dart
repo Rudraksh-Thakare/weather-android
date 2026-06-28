@@ -184,7 +184,7 @@ class WeatherCard extends StatelessWidget {
             DetailChip(
               icon: Icons.visibility_outlined,
               label: 'Visibility',
-              value: '${(weather.visibility / 1000).toStringAsFixed(1)} km',
+              value: weather.visibilityText,
             ),
           ],
         ),
