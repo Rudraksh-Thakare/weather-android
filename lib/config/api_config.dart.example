@@ -1,0 +1,6 @@
+// This file is gitignored — never commit your real key.
+// Copy this file to api_config.dart and add your key there.
+
+class ApiConfig {
+  static const String openWeatherApiKey = 'YOUR_API_KEY_HERE';
+}
